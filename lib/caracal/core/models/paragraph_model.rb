@@ -63,7 +63,9 @@ module Caracal
 
         # .plaintext
         def plain_text
-          runs.collect { |run| run.try(:text_content).to_s }.join(' ').strip
+          runs.collect { |run| 
+            run.text_content.to_s if(run.respond_to?(:text_content))
+          }.join(' ').strip
         end
 
         #========== SETTERS ===============================

@@ -21,7 +21,7 @@ describe Caracal::Core::TableOfContents do
     end
     
     # .table_of_contents
-    describe '.toc' do
+    describe '.table_of_contents' do
       let!(:size) { subject.contents.size }
       
       before { subject.table_of_contents }

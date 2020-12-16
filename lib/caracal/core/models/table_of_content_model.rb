@@ -15,15 +15,18 @@ module Caracal
         #--------------------------------------------------
 
         # constants
+        const_set(:DEFAULT_LEGEND, "Table of contents")
         const_set(:DEFAULT_START_LEVEL, 1)
         const_set(:DEFAULT_END_LEVEL,   3)
 
         # accessors
+        attr_reader :toc_legend
         attr_reader :toc_start_level
         attr_reader :toc_end_level
 
         # initialization
         def initialize(options={}, &block)
+          @toc_legend = DEFAULT_LEGEND
           @toc_start_level = DEFAULT_START_LEVEL
           @toc_end_level = DEFAULT_END_LEVEL
 
@@ -42,11 +45,18 @@ module Caracal
             instance_variable_set("@toc_#{ m }", value.to_i)
           end
         end
+        
+        # strings
+        [:legend].each do |m|
+          define_method "#{ m }" do |value|
+            instance_variable_set("@toc_#{ m }", value.to_s)
+          end
+        end
 
         #========== STATE HELPER ===========================
 
         def includes?(level)
-          (toc_start_level..toc_end_level).include? level
+          (toc_start_level..toc_end_level).include? level.to_i
         end
 
         #========== VALIDATION ============================
@@ -67,7 +77,7 @@ module Caracal
         private
 
         def option_keys
-          [:start_level, :end_level]
+          [:legend, :start_level, :end_level]
         end
 
       end

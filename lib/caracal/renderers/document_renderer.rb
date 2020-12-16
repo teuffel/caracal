@@ -31,7 +31,7 @@ module Caracal
               #============= PAGE SETTINGS ==============================
 
               xml['w'].sectPr do
-                if (rel = document.find_relationship('header1.xml'))
+                if (rel = document.find_relationship('header1.xml') && false)
                   xml['w'].headerReference({ 'r:id' => rel.formatted_id, 'w:type' => 'default' })
                 end
                 if document.page_number_show
@@ -468,7 +468,7 @@ module Caracal
       def headings
         heading_styles = document.outline_styles.collect(&:style_id)
         document.contents.select do |model|
-          model.respond_to?(:paragraph_style) && heading_styles.include?(model.paragraph_style) && !model.empty?
+          model.respond_to?(:paragraph_style) && heading_styles.include?(model.paragraph_style)
         end
       end
 
@@ -481,7 +481,7 @@ module Caracal
           bookmarks << {
             ref: bookmark_for(heading),
             text: heading.plain_text,
-            level: heading.try(:paragraph_style).match(/Heading(\d)\Z/) { |m| m[1] || 1 }
+            level: heading.paragraph_style.match(/Heading(\d)\Z/) { |m| m[1] || 1 }
           }
         end
         bookmarks

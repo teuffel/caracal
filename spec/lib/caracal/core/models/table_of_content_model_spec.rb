@@ -14,6 +14,7 @@ describe Caracal::Core::Models::TableOfContentModel do
     
     # constants
     describe 'constants' do
+      it { expect(described_class::DEFAULT_LEGEND).to eq "Table of contents"}
       it { expect(described_class::DEFAULT_START_LEVEL).to eq 1 }
       it { expect(described_class::DEFAULT_END_LEVEL).to   eq 3 }
     end
@@ -118,7 +119,7 @@ describe Caracal::Core::Models::TableOfContentModel do
     # .option_keys
     describe '.option_keys' do
       let(:actual)     { subject.send(:option_keys).sort }
-      let(:expected)  { [:start_level, :end_level].sort }
+      let(:expected)  { [:legend, :start_level, :end_level].sort }
       
       it { expect(actual).to eq expected }
     end

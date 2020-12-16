@@ -149,13 +149,13 @@ module Caracal
         render_core(zip)
         render_custom(zip)
         render_fonts(zip)
-        render_header(zip)
+        #render_header(zip)
         render_footer(zip)
         render_settings(zip)
         render_styles(zip)
         render_document(zip)
         render_relationships(zip)          # Must go here: Depends on document renderer
-        render_header_relationships(zip)   # Must go here: Depends on document renderer
+        #render_header_relationships(zip)   # Must go here: Depends on document renderer
         render_media(zip)                  # Must go here: Depends on document renderer
         render_numbering(zip)              # Must go here: Depends on document renderer
       end
